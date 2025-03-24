@@ -29,8 +29,13 @@ const readline = require('readline-sync');
 const hasTorch = true;
 const hasMap = false;
 
+// Your variables
+const hasSpear = false;
+const hasTownMap = false;
+const hasMeds = false;
+
 console.log("You see two paths: one leads to the mountains, the other to the village.");
-const choice = readline.question("Do you go to the 'mountains' or the 'village'?");
+const choice = readline.question("Do you go to the 'mountains' or the 'village'? ");
 
 if (choice === "mountains" && hasTorch) {
   console.log("You safely navigate through the dark mountains.");
@@ -38,9 +43,36 @@ if (choice === "mountains" && hasTorch) {
   console.log("It's too dark to proceed. You decide to turn back.");
 } else if (choice === "village" || hasMap) {
   console.log("You find your way to the village.");
+  
+  //my code village extension
+  const villagePath = readline.question('Do you investigate the village? (Y or N): ');
+
+  if (villagePath === 'Y' && hasSpear) {
+    console.log("You safely fight off bandits raiding the village.");
+  } else if (villagePath === 'Y' && !hasSpear) {
+    console.log("You were attacked by bandits, and this was no mere flesh wound.");
+    if (hasMeds) {
+      console.log("You live to fight another day.");
+    } else {
+      console.log("You die.");
+    }
+  } else if (villagePath === 'N' && hasTownMap) {
+    console.log("You navigate the town unharmed.");
+  } else if (villagePath === 'N' && !hasTownMap) {
+    console.log("Bandits attack you and leave you to perish.");
+    
+    if (hasMeds) {
+      console.log("You live to fight another day.");
+    } else {
+      console.log("You die.");
+    }
+  } else {
+    console.log("Invalid choice. You decide to leave.");
+  }
 } else {
   console.log("You get lost and wander aimlessly.");
 }
+
 
 /* 
 
